@@ -1,19 +1,23 @@
 function playSong (idElementAudio) {
-    document.querySelector(idElementAudio).play();
+   document.querySelector(idElementAudio).play(); 
 }
+const listaDeTeclas = document.querySelectorAll('.tecla');
 
-const keysList = document.querySelectorAll('.tecla');
 
-let counter = 0;
+for (let counter = 0; counter < listaDeTeclas.length; counter++) {
 
-while (counter < keysList.length) {
+    const tecla = listaDeTeclas[counter];
+    const instrumento = tecla.classList[1];
 
-    const keyBoard = keysList[counter];
-    const audio = keyBoard.classList[1];
-
-    keyBoard.onclick = function () {
-        playSong (`#som_${audio}`)
+    tecla.onclick = function () {
+        playSong (`#som_${instrumento}`)
     };
+    
+    tecla.onkeydown = function () {
+        tecla.classList.add('ativa');
+    }
+    tecla.onkeyup = function() {
+        tecla.classList.remove('ativa');
+    }
 
-    counter = counter + 1;
 }
